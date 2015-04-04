@@ -24,10 +24,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.provision :shell, path: 'puppet/install_puppet.sh'
 
-  # config.vm.provision 'puppet' do |puppet|
-  #   puppet.manifests_path = 'puppet/manifests'
-  #   puppet.module_path = 'puppet/modules'
-  #   puppet.manifest_file = 'site.pp'
-  # end
-
 end
