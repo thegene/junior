@@ -1,6 +1,15 @@
 class nginx($domain = 'localhost') {
   $mod_version = '0.2.5'
 
+  group { 'nginx':
+    ensure => 'present'
+  }
+
+  user { 'nginx':
+    groups => 'nginx',
+    require => Group['nginx']
+  }
+
   exec { "ensure-external-module":
     command => "puppet module install jfryman-nginx --version ${mod_version} --modulepath ${common::modulepath}",
     path => '/usr/bin:/bin',
@@ -11,7 +20,8 @@ class nginx($domain = 'localhost') {
     ensure => 'directory',
     owner => 'nginx',
     group => 'nginx',
-    mode => '755'
+    mode => '755',
+    require => User['nginx']
   }
 
   # file { 'apps_directory':
