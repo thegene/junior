@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'centos65-x86_64-20140116'
 
   config.vm.synced_folder 'puppet', '/etc/puppet'
-  config.vm.hostname = 'junior'
+  config.vm.hostname = 'dev-junior'
 
   # network settings
   config.vm.network 'forwarded_port', guest: 80, host: 4567
