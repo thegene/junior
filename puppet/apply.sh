@@ -1,0 +1,1 @@
+puppet apply -v /etc/puppet/manifests/site.pp

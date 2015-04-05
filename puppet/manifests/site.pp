@@ -1,6 +1,8 @@
 node 'dev-junior' {
-  include common
-  include web_servers
+  
+  class { 'web_servers':
+    domain => 'eugenewestbrook.com'
+  }
 
 
 }

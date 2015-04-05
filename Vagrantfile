@@ -22,6 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end
   
-  config.vm.provision :shell, path: 'puppet/install_puppet.sh'
+  config.vm.provision :shell, path: 'puppet/prepare-box.sh'
+  config.vm.provision :shell, path: 'puppet/apply.sh'
 
 end
