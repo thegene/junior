@@ -14,8 +14,8 @@ define web_servers::server($app_name) {
   file { "${app_name}_directory":
     path => $app_root,
     ensure => 'directory',
-    owner => 'nginx',
-    group => 'nginx',
+    owner => 'deploy',
+    group => 'deploy',
     mode => '755',
   }
 
