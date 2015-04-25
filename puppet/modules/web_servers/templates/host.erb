@@ -1,0 +1,11 @@
+server { listen  80;
+  server_name <%= scope.lookupvar('fqdn') %>;
+  access_log /var/log/nginx/<%= scope.lookupvar('fqdn') %>/access.log;
+  error_log  /var/log/nginx/<%= scope.lookupvar('fqdn') %>/error.log;
+  root /var/www/apps/<%= scope.lookupvar('fqdn') %>/current/;
+  charset utf-8;
+
+#  location / {
+#    try_files $uri /index.html;
+#  }
+}
