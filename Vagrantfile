@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'centos65-x86_64-20140116'
 
   config.vm.synced_folder 'puppet', '/etc/puppet'
+  config.vm.synced_folder 'shared', '/data/shared', owner: 'deploy'
   config.vm.hostname = 'dev-junior'
 
   config.vm.network 'private_network', ip: '192.168.100.100'
