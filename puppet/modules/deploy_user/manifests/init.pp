@@ -17,4 +17,10 @@ class deploy_user {
     groups => 'deploy',
     require => Group['deploy']
   }
+
+  file { ['/home/deploy', '/home/deploy/.ssh']:
+    group => 'deploy',
+    owner => 'deploy',
+    ensure => 'directory'
+  }
 }

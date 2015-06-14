@@ -5,11 +5,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box_url = 'https://github.com/tommy-muehle/puppet-vagrant-boxes/releases/download/1.0.0/centos-6.6-x86_64.box'
-  config.vm.box = 'centos-6.6-x86_64'
+  config.vm.box_url = 'https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box'
+  config.vm.box = 'centos65-x86_64-20140116'
 
   config.vm.synced_folder 'puppet', '/etc/puppet'
-  config.vm.synced_folder 'data', '/data/apps'
   config.vm.hostname = 'dev-junior'
 
   config.vm.network 'private_network', ip: '192.168.100.100'
@@ -22,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end
   
-  # config.vm.provision :shell, path: 'puppet/prepare-box.sh'
-  # config.vm.provision :shell, path: 'puppet/apply.sh'
+  config.vm.provision :shell, path: 'puppet/prepare-box.sh'
+  config.vm.provision :shell, path: 'puppet/apply.sh'
 
 end

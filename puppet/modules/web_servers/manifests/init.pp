@@ -1,4 +1,8 @@
 class web_servers($domain = 'localhost') {
+  package { 'epel-release':
+    ensure => 'present',
+    before => Package['nginx']
+  }
 
   package { 'nginx':
     ensure => '1.0.15-11.el6',
@@ -17,12 +21,20 @@ class web_servers($domain = 'localhost') {
     require => Package['nginx']
   }
 
-  file { ['/var/www', '/var/www/apps']:
+  file { ['/var/www', '/data', '/data/apps']:
     ensure => 'directory',
     owner => 'deploy',
     group => 'deploy',
     mode => '755',
-    require => User['deploy']
+    require => User['deploy'],
+    before => File['/var/www/apps']
+  }
+
+  file { '/var/www/apps':
+    ensure => 'link',
+    target => '/data/apps',
+    group => 'deploy',
+    owner => 'deploy',
   }
 
   web_servers::server { 'wedding':
