@@ -21,7 +21,7 @@ class web_servers($domain = 'localhost') {
     require => Package['nginx']
   }
 
-  file { ['/var/www', '/data', '/data/apps']:
+  file { ['/var/www', '/data', '/data/apps', '/data/log', '/data/log/nginx']:
     ensure => 'directory',
     owner => 'deploy',
     group => 'deploy',
@@ -35,6 +35,15 @@ class web_servers($domain = 'localhost') {
     target => '/data/apps',
     group => 'deploy',
     owner => 'deploy',
+  }
+
+  file { '/var/log/nginx':
+    ensure => 'link',
+    target => '/data/log/nginx',
+    group => 'deploy',
+    owner => 'deploy',
+    force => true,
+    require => File['/var/www/apps']
   }
 
   web_servers::server { 'wedding':
@@ -58,7 +67,7 @@ define web_servers::server($app_name, $domain) {
   }
 
   file { "${app_name}-host":
-    path => "/etc/nginx/conf.d/${app_name}.conf",
+    path => "/etc/nginx/conf.d/${fqdn}.conf",
     content => template('web_servers/host.erb'),
     mode => '755',
     owner => 'nginx'
