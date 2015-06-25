@@ -49,7 +49,8 @@ class web_servers($domain = 'localhost') {
   web_servers::server { 'wedding':
     app_name => 'wedding',
     domain => $domain,
-    notify => Service['nginx']
+    notify => Service['nginx'],
+    require => File['/var/www/apps']
   }
 
 }
