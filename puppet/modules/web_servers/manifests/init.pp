@@ -1,11 +1,11 @@
-class web_servers($domain = 'localhost') {
+class web_servers($domain = 'localhost', $version) {
   package { 'epel-release':
     ensure => 'present',
     before => Package['nginx']
   }
 
   package { 'nginx':
-    ensure => '1.0.15-11.el6',
+    ensure => $version,
     require => File['/var/www/apps']
   }
 

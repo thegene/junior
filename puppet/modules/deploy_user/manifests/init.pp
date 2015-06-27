@@ -14,7 +14,7 @@ class deploy_user {
   }
 
   user { 'deploy':
-    groups => 'deploy',
+    gid => 'deploy',
     require => Group['deploy']
   }
 
